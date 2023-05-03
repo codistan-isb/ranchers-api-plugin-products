@@ -24,6 +24,10 @@ const filters = new SimpleSchema({
     type: Boolean,
     optional: true
   },
+  "isFeatured": {
+    type: Boolean,
+    optional: true
+  },
   "isVisible": {
     type: Boolean,
     optional: true
@@ -161,6 +165,14 @@ export default function applyProductFilters(context, productFilters) {
       selector = {
         ...selector,
         isDeleted: productFilters.isArchived
+      };
+    }
+
+    // filter by Featured
+    if (productFilters.isFeatured !== undefined) {
+      selector = {
+        ...selector,
+        isDeleted: productFilters.isFeatured
       };
     }
 

@@ -22,7 +22,7 @@ type Product {
   media(
     "Determines whether variant media should be included in the product or not"
     shouldIncludeVariantMedia: Boolean = true
-    ): [ImageInfo]
+  ): [ImageInfo]
 
   "The product description to use for page `description` meta element in HTML"
   metaDescription: String
@@ -66,22 +66,22 @@ type Product {
   "The list of tags that have been applied to this product"
   tags(
     "Return only results that come after this cursor. Use this with `first` to specify the number of results to return."
-    after: ConnectionCursor,
+    after: ConnectionCursor
 
     "Return only results that come before this cursor. Use this with `last` to specify the number of results to return."
-    before: ConnectionCursor,
+    before: ConnectionCursor
 
     "Return at most this many results. This parameter may be used with either `after` or `offset` parameters."
-    first: ConnectionLimitInt,
+    first: ConnectionLimitInt
 
     "Return at most this many results. This parameter may be used with the `before` parameter."
-    last: ConnectionLimitInt,
+    last: ConnectionLimitInt
 
     "Return only results that come after the Nth result. This parameter may be used with the `first` parameter."
-    offset: Int,
+    offset: Int
 
     "Return results sorted in this order"
-    sortOrder: SortOrder = asc,
+    sortOrder: SortOrder = asc
 
     "By default, tags are sorted by ID. Set this to sort by one of the other allowed fields"
     sortBy: TagSortByField = _id
@@ -96,7 +96,7 @@ type Product {
   "A list of all variants for this product"
   variants(
     "Include hidden variants"
-    shouldIncludeHidden: Boolean = true,
+    shouldIncludeHidden: Boolean = true
 
     "Include archived variants"
     shouldIncludeArchived: Boolean = false
@@ -153,7 +153,7 @@ type ProductVariant {
   "Child variants, if any"
   options(
     "Include hidden variants"
-    shouldIncludeHidden: Boolean = true,
+    shouldIncludeHidden: Boolean = true
 
     "Include archived variants"
     shouldIncludeArchived: Boolean = false
@@ -187,7 +187,7 @@ type ProductVariant {
 }
 
 "Response payload of `archiveProducts` mutation"
-type ArchiveProductsPayload  {
+type ArchiveProductsPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -196,7 +196,7 @@ type ArchiveProductsPayload  {
 }
 
 "Response payload of `archiveProductVariants` mutation"
-type ArchiveProductVariantsPayload  {
+type ArchiveProductVariantsPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -214,7 +214,7 @@ type UpdateProductsVisibilityPayload {
 }
 
 "Response payload of `createProduct` mutation"
-type CreateProductPayload  {
+type CreateProductPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -223,7 +223,7 @@ type CreateProductPayload  {
 }
 
 "Response payload of `createProductVariant` mutation"
-type CreateProductVariantPayload  {
+type CreateProductVariantPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -232,7 +232,7 @@ type CreateProductVariantPayload  {
 }
 
 "Response payload of `cloneProducts` mutation"
-type CloneProductsPayload  {
+type CloneProductsPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -241,7 +241,7 @@ type CloneProductsPayload  {
 }
 
 "Response payload of `cloneProductVariants` mutation"
-type CloneProductVariantsPayload  {
+type CloneProductVariantsPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -250,7 +250,7 @@ type CloneProductVariantsPayload  {
 }
 
 "Response payload of `updateProduct` mutation"
-type UpdateProductPayload  {
+type UpdateProductPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -259,7 +259,7 @@ type UpdateProductPayload  {
 }
 
 "Response payload of `updateProductVariantField` mutation"
-type UpdateProductVariantPayload  {
+type UpdateProductVariantPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -302,7 +302,7 @@ type ProductConnection {
 }
 
 "Input for the `archiveProducts` mutation"
-input ArchiveProductsInput  {
+input ArchiveProductsInput {
   "Array of IDs of products to archive"
   productIds: [ID]!
 
@@ -311,7 +311,7 @@ input ArchiveProductsInput  {
 }
 
 "Input for the `archiveProducts` mutation"
-input ArchiveProductVariantsInput  {
+input ArchiveProductVariantsInput {
   "ID of shop that owns all variants you are archiving"
   shopId: ID!
 
@@ -356,7 +356,7 @@ input CreateProductVariantInput {
 }
 
 "Input for the `cloneProducts` mutation"
-input CloneProductsInput  {
+input CloneProductsInput {
   "Array of IDs of products to clone"
   productIds: [ID]!
 
@@ -365,7 +365,7 @@ input CloneProductsInput  {
 }
 
 "Input for the `cloneProductVariants` mutation"
-input CloneProductVariantsInput  {
+input CloneProductVariantsInput {
   "ID of shop that owns all product variants you want to clone"
   shopId: ID!
 
@@ -517,7 +517,7 @@ input ProductVariantInput {
 }
 
 "Input for the `updateProductVariantField` mutation"
-input UpdateProductVariantInput  {
+input UpdateProductVariantInput {
   "ID of shop that owns the variant to update"
   shopId: ID!
 
@@ -527,7 +527,6 @@ input UpdateProductVariantInput  {
   "ID of variant to update"
   variantId: ID!
 }
-
 
 "The fields by which you are allowed to sort any query that returns a `ProductConnection`"
 enum ProductSortByField {
@@ -604,17 +603,19 @@ extend type Query {
   "Query for a single Product"
   product(
     "Product ID"
-    productId: ID!,
+    productId: ID!
 
     "Shop ID"
     shopId: ID!
-
   ): Product
 
   "Query for a list of Products"
   products(
     "Filter by archived"
     isArchived: Boolean
+
+    "Filter by Featured"
+    isFeatured: Boolean
 
     "Filter by visibility"
     isVisible: Boolean
@@ -647,22 +648,22 @@ extend type Query {
     tagIds: [ID]
 
     "Return only results that come after this cursor. Use this with `first` to specify the number of results to return."
-    after: ConnectionCursor,
+    after: ConnectionCursor
 
     "Return only results that come before this cursor. Use this with `last` to specify the number of results to return."
-    before: ConnectionCursor,
+    before: ConnectionCursor
 
     "Return at most this many results. This parameter may be used with either `after` or `offset` parameters."
-    first: ConnectionLimitInt,
+    first: ConnectionLimitInt
 
     "Return at most this many results. This parameter may be used with the `before` parameter."
-    last: ConnectionLimitInt,
+    last: ConnectionLimitInt
 
     "Return only results that come after the Nth result. This parameter may be used with the `first` parameter."
-    offset: Int,
+    offset: Int
 
     "Return results sorted in this order"
-    sortOrder: SortOrder = desc,
+    sortOrder: SortOrder = desc
 
     "By default, products are sorted by createdAt. Set this to sort by one of the other allowed fields"
     sortBy: ProductSortByField = createdAt

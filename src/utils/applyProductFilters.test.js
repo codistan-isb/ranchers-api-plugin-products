@@ -9,6 +9,7 @@ describe("Test metafields search methods", () => {
     tagIds: undefined,
     query: undefined,
     isArchived: undefined,
+    isFeatured: undefined,
     isVisible: undefined,
     isExactMatch: false, // selector user fuzzy search if false, exact match if true
     metafieldKey: "mockMetafieldKey",
