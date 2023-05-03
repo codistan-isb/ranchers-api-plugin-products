@@ -213,6 +213,11 @@ type UpdateProductsVisibilityPayload {
   updatedCount: Int
 }
 
+enum CatalogBooleanFilterName {
+  "isFeatured"
+  isFeatured
+}
+
 "Response payload of `createProduct` mutation"
 type CreateProductPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
