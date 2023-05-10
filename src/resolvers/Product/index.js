@@ -11,7 +11,10 @@ export default {
   media: (node, args, context) => getProductMedia(node, args, context),
   metafields: (node) => node.metafields || [],
   shop: resolveShopFromShopId,
-  slug: (node) => node.handle,
+  slug: (node) => {
+    console.log("Node ", node)
+    node.handle
+  },
   socialMetadata,
   tagIds,
   tags,

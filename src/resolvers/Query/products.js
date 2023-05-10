@@ -51,7 +51,7 @@ export default async function products(_, args, context, info) {
     priceMin,
     priceMax
   });
-
+  console.log(query, "query")
   return getPaginatedResponse(query, connectionArgs, {
     includeHasNextPage: wasFieldRequested("pageInfo.hasNextPage", info),
     includeHasPreviousPage: wasFieldRequested("pageInfo.hasPreviousPage", info),
