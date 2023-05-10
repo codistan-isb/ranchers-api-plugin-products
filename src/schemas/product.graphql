@@ -621,7 +621,8 @@ extend type Query {
 
     "Filter by Featured"
     isFeatured: Boolean
-
+    "featuredImage"
+    featuredImage: String
     "Filter by visibility"
     isVisible: Boolean
 

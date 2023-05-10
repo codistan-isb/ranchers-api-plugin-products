@@ -28,6 +28,10 @@ const filters = new SimpleSchema({
     type: Boolean,
     optional: true
   },
+  "featuredImage": {
+    type: String,
+    optional: true
+  },
   "isVisible": {
     type: Boolean,
     optional: true

@@ -10,6 +10,7 @@ describe("Test metafields search methods", () => {
     query: undefined,
     isArchived: undefined,
     isFeatured: undefined,
+    featuredImage: undefined,
     isVisible: undefined,
     isExactMatch: false, // selector user fuzzy search if false, exact match if true
     metafieldKey: "mockMetafieldKey",
