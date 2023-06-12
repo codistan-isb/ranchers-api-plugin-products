@@ -29,7 +29,7 @@ export default async function products(_, args, context, info) {
     priceMax,
     ...connectionArgs
   } = args;
-
+variants;
   const shopIds = opaqueShopIds.map(decodeShopOpaqueId);
   const productIds = opaqueProductIds && opaqueProductIds.map(decodeProductOpaqueId);
   const tagIds = opaqueTagIds && opaqueTagIds.map(decodeTagOpaqueId);

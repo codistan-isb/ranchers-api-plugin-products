@@ -13,7 +13,8 @@ export default {
   shop: resolveShopFromShopId,
   slug: (node) => node.handle,
   socialMetadata,
+  inventoryStatus: (node) => node.inventoryStatus,
   tagIds,
   tags,
-  variants: (node, args, context) => getVariants(context, node._id, true, args)
+  variants: (node, args, context) => getVariants(context, node._id, true, args),
 };
