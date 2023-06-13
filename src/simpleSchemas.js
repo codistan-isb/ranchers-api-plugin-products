@@ -15,29 +15,29 @@ const Metafield = new SimpleSchema({
   key: {
     type: String,
     max: 30,
-    optional: true
+    optional: true,
   },
   namespace: {
     type: String,
     max: 20,
-    optional: true
+    optional: true,
   },
   scope: {
     type: String,
-    optional: true
+    optional: true,
   },
   value: {
     type: String,
-    optional: true
+    optional: true,
   },
   valueType: {
     type: String,
-    optional: true
+    optional: true,
   },
   description: {
     type: String,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 /**
@@ -53,24 +53,24 @@ const Metafield = new SimpleSchema({
 const ShippingParcel = new SimpleSchema({
   containers: {
     type: String,
-    optional: true
+    optional: true,
   },
   length: {
     type: Number,
-    optional: true
+    optional: true,
   },
   width: {
     type: Number,
-    optional: true
+    optional: true,
   },
   height: {
     type: Number,
-    optional: true
+    optional: true,
   },
   weight: {
     type: Number,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 /**
@@ -83,14 +83,14 @@ const ShippingParcel = new SimpleSchema({
  * @property {String[]} workflow optional
  */
 const Workflow = new SimpleSchema({
-  "status": {
-    type: String
+  status: {
+    type: String,
   },
-  "workflow": {
+  workflow: {
     type: Array,
-    optional: true
+    optional: true,
   },
-  "workflow.$": String
+  "workflow.$": String,
 });
 
 /**
@@ -104,28 +104,28 @@ const Workflow = new SimpleSchema({
  * @property {Date} createdAt required
  */
 export const VariantMedia = new SimpleSchema({
-  "mediaId": {
+  mediaId: {
     type: String,
-    optional: true
+    optional: true,
   },
-  "priority": {
+  priority: {
     type: SimpleSchema.Integer,
-    optional: true
+    optional: true,
   },
-  "metafields": {
+  metafields: {
     type: Array,
-    optional: true
+    optional: true,
   },
   "metafields.$": {
-    type: Metafield
+    type: Metafield,
   },
-  "updatedAt": {
+  updatedAt: {
     type: Date,
-    optional: true
+    optional: true,
   },
-  "createdAt": {
-    type: Date
-  }
+  createdAt: {
+    type: Date,
+  },
 });
 
 /**
@@ -155,101 +155,108 @@ export const VariantMedia = new SimpleSchema({
  * @property {Workflow} workflow optional
  */
 export const ProductVariant = new SimpleSchema({
-  "_id": {
+  _id: {
     type: String,
-    label: "Variant ID"
+    label: "Variant ID",
   },
-  "ancestors": {
-    type: Array
+  ancestors: {
+    type: Array,
   },
   "ancestors.$": {
-    type: String
-  },
-  "attributeLabel": {
     type: String,
-    optional: true
   },
-  "barcode": {
+  uploadedBy: {
+    type: Array,
+    optional: true,
+  },
+  "uploadedBy.$": {
     type: String,
-    optional: true
   },
-  "createdAt": {
+  attributeLabel: {
+    type: String,
+    optional: true,
+  },
+  barcode: {
+    type: String,
+    optional: true,
+  },
+  createdAt: {
     type: Date,
-    optional: true
+    optional: true,
   },
-  "height": {
+  height: {
     type: Number,
     min: 0,
-    optional: true
+    optional: true,
   },
-  "index": {
+  index: {
     label: "Variant position number in list",
     type: SimpleSchema.Integer,
-    optional: true
+    optional: true,
   },
-  "isDeleted": {
-    type: Boolean
+  isDeleted: {
+    type: Boolean,
   },
-  "isVisible": {
-    type: Boolean
+  isVisible: {
+    type: Boolean,
   },
-  "length": {
+  length: {
     type: Number,
     min: 0,
-    optional: true
+    optional: true,
   },
-  "metafields": {
+  metafields: {
     type: Array,
-    optional: true
+    optional: true,
   },
   "metafields.$": {
-    type: Metafield
+    type: Metafield,
   },
-  "minOrderQuantity": {
+  minOrderQuantity: {
     label: "Minimum order quantity",
     type: SimpleSchema.Integer,
-    optional: true
+    optional: true,
   },
-  "optionTitle": {
+  optionTitle: {
     type: String,
-    optional: true
+    optional: true,
   },
-  "originCountry": {
+  originCountry: {
     type: String,
-    optional: true
+    optional: true,
   },
-  "shopId": {
-    type: String
-  },
-  "sku": {
+  shopId: {
     type: String,
-    optional: true
   },
-  "title": {
+  sku: {
     type: String,
-    optional: true
+    optional: true,
   },
-  "type": {
-    type: String
+  title: {
+    type: String,
+    optional: true,
   },
-  "updatedAt": {
+  type: {
+    type: String,
+  },
+  updatedAt: {
     type: Date,
-    optional: true
+    optional: true,
   },
-  "weight": {
+  weight: {
     type: Number,
     min: 0,
-    optional: true
+    optional: true,
   },
-  "width": {
+  width: {
     type: Number,
     min: 0,
-    optional: true
+    optional: true,
   },
-  "workflow": {
+  workflow: {
     type: Workflow,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 /**
@@ -288,131 +295,143 @@ export const ProductVariant = new SimpleSchema({
  * @property {Workflow} workflow optional
  */
 export const Product = new SimpleSchema({
-  "_id": {
+  inventoryStatus: {
     type: String,
-    label: "Product ID"
+    optional: true,
+    label: "inventory Status",
   },
-  "ancestors": {
-    type: Array
+  _id: {
+    type: String,
+    label: "Product ID",
+  },
+  uploadedBy: {
+    type: Array,
+    optional:true
+  },
+  "uploadedBy.$": {
+    type: String,
+  },
+  ancestors: {
+    type: Array,
   },
   "ancestors.$": {
-    type: String
-  },
-  "createdAt": {
-    type: Date
-  },
-  "currentProductHash": {
     type: String,
-    optional: true
   },
-  "description": {
-    type: String,
-    optional: true
+  createdAt: {
+    type: Date,
   },
-  "facebookMsg": {
+  currentProductHash: {
     type: String,
     optional: true,
-    max: 255
   },
-  "googleplusMsg": {
+  description: {
     type: String,
     optional: true,
-    max: 255
   },
-  "handle": {
-    type: String
+  facebookMsg: {
+    type: String,
+    optional: true,
+    max: 255,
   },
-  "hashtags": {
+  googleplusMsg: {
+    type: String,
+    optional: true,
+    max: 255,
+  },
+  handle: {
+    type: String,
+  },
+  hashtags: {
     type: Array,
-    optional: true
+    optional: true,
   },
   "hashtags.$": {
-    type: String
-  },
-  "isDeleted": {
-    type: Boolean
-  },
-  "isVisible": {
-    type: Boolean
-  },
-  "metaDescription": {
     type: String,
-    optional: true
   },
-  "metafields": {
+  isDeleted: {
+    type: Boolean,
+  },
+  isVisible: {
+    type: Boolean,
+  },
+  metaDescription: {
+    type: String,
+    optional: true,
+  },
+  metafields: {
     type: Array,
-    optional: true
+    optional: true,
   },
   "metafields.$": {
-    type: Metafield
+    type: Metafield,
   },
-  "originCountry": {
-    type: String,
-    optional: true
-  },
-  "pageTitle": {
-    type: String,
-    optional: true
-  },
-  "parcel": {
-    type: ShippingParcel,
-    optional: true
-  },
-  "pinterestMsg": {
+  originCountry: {
     type: String,
     optional: true,
-    max: 255
   },
-  "productType": {
+  pageTitle: {
     type: String,
-    optional: true
+    optional: true,
   },
-  "publishedAt": {
+  parcel: {
+    type: ShippingParcel,
+    optional: true,
+  },
+  pinterestMsg: {
+    type: String,
+    optional: true,
+    max: 255,
+  },
+  productType: {
+    type: String,
+    optional: true,
+  },
+  publishedAt: {
     type: Date,
-    optional: true
+    optional: true,
   },
-  "publishedProductHash": {
+  publishedProductHash: {
     type: String,
-    optional: true
+    optional: true,
   },
-  "shopId": {
-    type: String
+  shopId: {
+    type: String,
   },
-  "shouldAppearInSitemap": {
+  shouldAppearInSitemap: {
     type: Boolean,
-    optional: true
+    optional: true,
   },
-  "supportedFulfillmentTypes": {
-    type: Array
+  supportedFulfillmentTypes: {
+    type: Array,
   },
   "supportedFulfillmentTypes.$": String,
-  "template": {
-    type: String,
-    optional: true
-  },
-  "title": {
-    type: String
-  },
-  "twitterMsg": {
+  template: {
     type: String,
     optional: true,
-    max: 140
   },
-  "type": {
-    type: String
-  },
-  "updatedAt": {
-    type: Date,
-    optional: true
-  },
-  "vendor": {
+  title: {
     type: String,
-    optional: true
   },
-  "workflow": {
+  twitterMsg: {
+    type: String,
+    optional: true,
+    max: 140,
+  },
+  type: {
+    type: String,
+  },
+  updatedAt: {
+    type: Date,
+    optional: true,
+  },
+  vendor: {
+    type: String,
+    optional: true,
+  },
+  workflow: {
     type: Workflow,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 // Deprecated. This schema is no longer used but because it's registered

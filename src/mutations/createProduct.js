@@ -83,12 +83,12 @@ export default async function createProduct(context, input) {
   await Products.insertOne(newProduct);
 
   // Create one initial product variant for it
-  if (shouldCreateFirstVariant) {
-    await context.mutations.createProductVariant(context.getInternalContext(), {
-      productId: newProductId,
-      shopId
-    });
-  }
+  // if (shouldCreateFirstVariant) {
+  //   await context.mutations.createProductVariant(context.getInternalContext(), {
+  //     productId: newProductId,
+  //     shopId
+  //   });
+  // }
 
   await appEvents.emit("afterProductCreate", { product: newProduct });
 
