@@ -243,6 +243,10 @@ export const ProductVariant = new SimpleSchema({
     type: Date,
     optional: true,
   },
+  brandId:{
+    type:String,
+    optional:true
+  },
   weight: {
     type: Number,
     min: 0,
@@ -264,6 +268,7 @@ export const ProductVariant = new SimpleSchema({
  * @type {SimpleSchema}
  * @memberof Schemas
  * @property {String} _id Product ID
+ * @property {String} brandId optional
  * @property {String[]} ancestors default value: `[]`
  * @property {Date} createdAt required
  * @property {String} currentProductHash optional
@@ -303,6 +308,12 @@ export const Product = new SimpleSchema({
   _id: {
     type: String,
     label: "Product ID",
+  },
+  brandId: {
+    type: String,
+    optional: true,
+    label: "Brand ID",
+
   },
   uploadedBy: {
     type: Array,
@@ -411,6 +422,10 @@ export const Product = new SimpleSchema({
   },
   title: {
     type: String,
+  },
+  brandId:{
+    type:String,
+    optional:true
   },
   twitterMsg: {
     type: String,

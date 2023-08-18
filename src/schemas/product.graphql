@@ -2,6 +2,10 @@
 type Product {
   "Product ID"
   _id: ID!
+
+"BrandID of the product"
+  brandId: ID
+
   inventoryStatus: String
   "The date and time at which this product was created"
   createdAt: DateTime!
@@ -395,6 +399,10 @@ input ProductInput {
   a product, a random unique string is generated for you.
   """
   _id: String
+
+
+" BrandID of the product"
+  brandId: ID
 
   "The full product description, which may have newline characters in it"
   description: String
