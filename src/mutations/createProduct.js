@@ -33,7 +33,7 @@ export default async function createProduct(context, input) {
   const { Product } = simpleSchemas;
   const { Products } = collections;
   const { product: productInput, shopId, shouldCreateFirstVariant = true } = input;
-
+  
   // Check that user has permission to create product
   await context.validatePermissions("reaction:legacy:products", "create", { shopId });
 
@@ -61,6 +61,7 @@ export default async function createProduct(context, input) {
     shouldAppearInSitemap: true,
     supportedFulfillmentTypes: ["shipping"],
     title: "",
+    brandId: productInput.brandId,
     type: "simple",
     updatedAt: createdAt,
     workflow: {
