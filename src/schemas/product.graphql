@@ -26,7 +26,7 @@ type Product {
   media(
     "Determines whether variant media should be included in the product or not"
     shouldIncludeVariantMedia: Boolean = true
-  ): [ImageInfo]
+  ): [ImageInfo]!
 
   "The product description to use for page `description` meta element in HTML"
   metaDescription: String
@@ -143,7 +143,7 @@ type ProductVariant {
   length: Float
 
   "All media for a variant"
-  media: [ImageInfo]
+  media: [ImageInfo]!
 
   "Arbitrary additional metadata about this product"
   metafields: [Metafield]!

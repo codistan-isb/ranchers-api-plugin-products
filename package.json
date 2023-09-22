@@ -1,5 +1,5 @@
 {
-  "name": "@codistan-isb/api-plugin-products",
+  "name": "@codistan-isb/bizb-api-plugin-products",
   "description": "Products plugin for the Reaction API",
   "version": "1.0.2-development",
   "main": "index.js",
