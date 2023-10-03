@@ -315,6 +315,11 @@ export const Product = new SimpleSchema({
     label: "Brand ID",
 
   },
+  referenceId: {
+    type: String,
+    optional: true,
+    label: "Reference ID",
+  },
   uploadedBy: {
     type: Array,
     optional:true

@@ -43,6 +43,9 @@ export default async function updateProductVariant(context, input) {
   if (fields.length === 0) {
     throw new ReactionError("invalid-param", "At least one field to update must be provided");
   }
+  if(productVariantInput.price === 0 || productVariantInput.price === null){
+    throw new ReactionError("invalid-param", "Price cannot be 0");
+  }
 
   updateDocument.updatedAt = new Date();
 

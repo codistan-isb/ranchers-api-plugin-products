@@ -3,8 +3,12 @@ type Product {
   "Product ID"
   _id: ID!
 
-"BrandID of the product"
+  "BrandID of the product"
   brandId: ID
+
+  "The ReferenceId of the product"
+  referenceId: String
+
 
   inventoryStatus: String
   "The date and time at which this product was created"
@@ -401,7 +405,7 @@ input ProductInput {
   _id: String
 
 
-" BrandID of the product"
+ " BrandID of the product"
   brandId: ID
 
   "The full product description, which may have newline characters in it"
@@ -457,6 +461,8 @@ input ProductInput {
 
   "The product vendor or manufacturer, for display"
   vendor: String
+  "The product ReferenceId "
+   referenceId: String
 }
 
 "Mutation input for a product variant or option"

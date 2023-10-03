@@ -61,4 +61,5 @@ extend type Mutation {
     "input which must includes an array of product ids and an array of tag ids"
     input: ProductTagsOperationInput!
   ): ProductTagsOperationPayload!
+  assignReferenceIdsToProducts: Boolean
 }

@@ -53,6 +53,11 @@ export default async function createProductVariant(context, input) {
   if (!parentProduct) {
     throw new ReactionError("not-found", "Product not found");
   }
+  console.log("productVariantInput", productVariantInput);
+  console.log("variant", productVariantInput.price);
+if(productVariantInput.price === 0 || productVariantInput.price === null){
+  throw new ReactionError("invalid-param", "Price cannot be 0");
+}
 
   let product;
   let parentVariant;

@@ -39,11 +39,22 @@ export default async function createProduct(context, input) {
 
   const newProductId = (productInput && productInput._id) || Random.id();
 
+  const lastProduct = await Products.find().sort({ referenceId: -1 }).limit(1).toArray();
+  console.log("lastProduct", lastProduct);
+  const lastReferenceId = lastProduct[0]?.referenceId ? parseInt(lastProduct[0]?.referenceId) : 0;
+  // let newOrderId=shop?.lastOrderId? parseInt(shop?.lastOrderId)+1:1; 
+  console.log("lastReferenceId", lastReferenceId);
+  // if (isNaN(lastReferenceId)) {
+  //   lastReferenceId = 0;
+  // }
+
   const initialProductData = await cleanProductInput(context, {
     productId: newProductId,
     productInput,
-    shopId
+    shopId,
+   
   });
+  console.log("initialProductData", initialProductData);
 
   if (initialProductData.isDeleted) {
     throw new ReactionError("invalid-param", "Creating a deleted product is not allowed");
@@ -67,8 +78,10 @@ export default async function createProduct(context, input) {
     workflow: {
       status: "new"
     },
+     referenceId: (lastReferenceId + 1).toString(),
     ...initialProductData
   };
+  console.log("newProduct", newProduct);
 
   // Apply custom transformations from plugins.
   for (const customFunc of context.getFunctionsOfType("mutateNewProductBeforeCreate")) {
