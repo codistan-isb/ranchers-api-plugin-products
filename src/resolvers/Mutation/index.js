@@ -10,6 +10,7 @@ import updateProduct from "./updateProduct.js";
 import updateProductVariant from "./updateProductVariant.js";
 import updateProductsVisibility from "./updateProductsVisibility.js";
 import updateProductPickedUpStatus from "./updateProductPickedUpStatus.js";
+import assignReferenceIdsToProducts from "./assignReferenceIdsToProducts.js";
 
 export default {
   addTagsToProducts,
@@ -24,4 +25,5 @@ export default {
   updateProductVariant,
   updateProductsVisibility,
   updateProductPickedUpStatus,
+  assignReferenceIdsToProducts
 };
