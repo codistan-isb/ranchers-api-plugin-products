@@ -113,7 +113,11 @@ export default function applyProductFilters(context, productFilters) {
           pageTitle: cond
         }, {
           description: cond
-        }]
+        },
+        {
+          referenceId: cond
+        }
+      ]
       };
     }
 
