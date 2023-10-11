@@ -2,18 +2,19 @@ import SimpleSchema from "simpl-schema";
 import Random from "@reactioncommerce/random";
 import ReactionError from "@reactioncommerce/reaction-error";
 import cleanProductInput from "../utils/cleanProductInput.js";
+import generateRandomReferenceId from "../utils/generateRandomReferenceId.js";
 
 const inputSchema = new SimpleSchema({
   product: {
     type: Object,
     blackbox: true,
-    optional: true
+    optional: true,
   },
   shopId: String,
   shouldCreateFirstVariant: {
     type: Boolean,
-    optional: true
-  }
+    optional: true,
+  },
 });
 
 /**
@@ -32,17 +33,34 @@ export default async function createProduct(context, input) {
   const { appEvents, collections, simpleSchemas } = context;
   const { Product } = simpleSchemas;
   const { Products } = collections;
-  const { product: productInput, shopId, shouldCreateFirstVariant = true } = input;
-  
+  const {
+    product: productInput,
+    shopId,
+    shouldCreateFirstVariant = true,
+  } = input;
+
   // Check that user has permission to create product
-  await context.validatePermissions("reaction:legacy:products", "create", { shopId });
+  await context.validatePermissions("reaction:legacy:products", "create", {
+    shopId,
+  });
 
-  const newProductId = (productInput && productInput._id) || Random.id();
-
-  const lastProduct = await Products.find().sort({ referenceId: -1 }).limit(1).toArray();
-  console.log("lastProduct", lastProduct);
-  const lastReferenceId = lastProduct[0]?.referenceId ? parseInt(lastProduct[0]?.referenceId) : 0;
-  // let newOrderId=shop?.lastOrderId? parseInt(shop?.lastOrderId)+1:1; 
+  let newProductId = (productInput && productInput._id) || Random.id();
+  let lastReferenceId = await generateRandomReferenceId(context);
+  // let lastProductReferenceId = await ProductSequence.find().toArray();
+  // console.log("lastProductReferenceId", lastProductReferenceId);
+  // let lastReferenceId = lastProductReferenceId[0]?.lastRandomId
+  //   ? (parseInt(lastGeneratedId[0]?.lastRandomId) + 1).toString()
+  //   : 0;
+  // ProductSequence.updateOne(
+  //   { _id: lastProductReferenceId[0]?._id },
+  //   {
+  //     $set: {
+  //       lastRandomId: lastReferenceId,
+  //       updatedAt: new Date(),
+  //     },
+  //   }
+  // );
+  // let newOrderId=shop?.lastOrderId? parseInt(shop?.lastOrderId)+1:1;
   console.log("lastReferenceId", lastReferenceId);
   // if (isNaN(lastReferenceId)) {
   //   lastReferenceId = 0;
@@ -52,12 +70,14 @@ export default async function createProduct(context, input) {
     productId: newProductId,
     productInput,
     shopId,
-   
   });
   console.log("initialProductData", initialProductData);
 
   if (initialProductData.isDeleted) {
-    throw new ReactionError("invalid-param", "Creating a deleted product is not allowed");
+    throw new ReactionError(
+      "invalid-param",
+      "Creating a deleted product is not allowed"
+    );
   }
 
   const createdAt = new Date();
@@ -76,15 +96,17 @@ export default async function createProduct(context, input) {
     type: "simple",
     updatedAt: createdAt,
     workflow: {
-      status: "new"
+      status: "new",
     },
-     referenceId: (lastReferenceId + 1).toString(),
-    ...initialProductData
+    referenceId: lastReferenceId,
+    ...initialProductData,
   };
   console.log("newProduct", newProduct);
 
   // Apply custom transformations from plugins.
-  for (const customFunc of context.getFunctionsOfType("mutateNewProductBeforeCreate")) {
+  for (const customFunc of context.getFunctionsOfType(
+    "mutateNewProductBeforeCreate"
+  )) {
     // Functions of type "mutateNewProductBeforeCreate" are expected to mutate the provided variant.
     // We need to run each of these functions in a series, rather than in parallel, because
     // we are mutating the same object on each pass.

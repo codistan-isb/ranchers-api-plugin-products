@@ -8,7 +8,7 @@ import {
   Product,
   ProductVariant,
   ProductVariantInputSchema,
-  VariantMedia
+  VariantMedia,
 } from "./simpleSchemas.js";
 
 /**
@@ -34,13 +34,16 @@ export default async function register(app) {
           [{ shopId: 1 }, { name: "c2_shopId" }],
           [{ "workflow.status": 1 }, { name: "c2_workflow.status" }],
           // Use _id as second sort to force full stability
-          [{ updatedAt: 1, _id: 1 }]
-        ]
-      }
+          [{ updatedAt: 1, _id: 1 }],
+        ],
+      },
+      ProductSequence: {
+        name: "ProductSequence",
+      },
     },
     graphQL: {
       resolvers,
-      schemas
+      schemas,
     },
     mutations,
     queries,
@@ -49,7 +52,7 @@ export default async function register(app) {
       Product,
       ProductVariant,
       ProductVariantInputSchema,
-      VariantMedia
-    }
+      VariantMedia,
+    },
   });
 }
