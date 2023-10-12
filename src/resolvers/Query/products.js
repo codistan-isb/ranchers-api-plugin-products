@@ -1,6 +1,10 @@
 import getPaginatedResponse from "@reactioncommerce/api-utils/graphql/getPaginatedResponse.js";
 import wasFieldRequested from "@reactioncommerce/api-utils/graphql/wasFieldRequested.js";
-import { decodeProductOpaqueId, decodeShopOpaqueId, decodeTagOpaqueId } from "../../xforms/id.js";
+import {
+  decodeProductOpaqueId,
+  decodeShopOpaqueId,
+  decodeTagOpaqueId,
+} from "../../xforms/id.js";
 
 /**
  * @name Query/products
@@ -29,9 +33,11 @@ export default async function products(_, args, context, info) {
     priceMax,
     ...connectionArgs
   } = args;
-
+  console.log("context", context.user);
+  console.log("_", _);
   const shopIds = opaqueShopIds.map(decodeShopOpaqueId);
-  const productIds = opaqueProductIds && opaqueProductIds.map(decodeProductOpaqueId);
+  const productIds =
+    opaqueProductIds && opaqueProductIds.map(decodeProductOpaqueId);
   const tagIds = opaqueTagIds && opaqueTagIds.map(decodeTagOpaqueId);
 
   const query = await context.queries.products(context, {
@@ -45,12 +51,12 @@ export default async function products(_, args, context, info) {
     metafieldKey,
     metafieldValue,
     priceMin,
-    priceMax
+    priceMax,
   });
 
   return getPaginatedResponse(query, connectionArgs, {
     includeHasNextPage: wasFieldRequested("pageInfo.hasNextPage", info),
     includeHasPreviousPage: wasFieldRequested("pageInfo.hasPreviousPage", info),
-    includeTotalCount: wasFieldRequested("totalCount", info)
+    includeTotalCount: wasFieldRequested("totalCount", info),
   });
 }

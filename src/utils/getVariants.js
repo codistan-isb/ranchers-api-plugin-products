@@ -10,16 +10,21 @@
  * @param {Boolean} args.shouldIncludeArchived - Include archived products in results
  * @returns {Promise<Object[]>} Array of Product Variant objects.
  */
-export default async function getVariants(context, productOrVariantId, topOnly, args) {
+export default async function getVariants(
+  context,
+  productOrVariantId,
+  topOnly,
+  args
+) {
   const { shouldIncludeHidden, shouldIncludeArchived } = args;
   const { collections } = context;
   const { Products } = collections;
 
   const selector = {
     ancestors: topOnly ? [productOrVariantId] : productOrVariantId,
-    type: "variant"
+    type: "variant",
   };
-
+  // console.log("productOrVariantId ", productOrVariantId);
   // Only include visible variants if `false`
   // Otherwise both hidden and visible will be shown
   if (shouldIncludeHidden === false) {
@@ -30,7 +35,7 @@ export default async function getVariants(context, productOrVariantId, topOnly, 
   // Otherwise include archived variants in the results
   if (shouldIncludeArchived === false) {
     selector.isDeleted = {
-      $ne: true
+      $ne: true,
     };
   }
 

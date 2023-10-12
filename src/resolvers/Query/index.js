@@ -3,5 +3,5 @@ import products from "./products.js";
 
 export default {
   product,
-  products
+  products,
 };

@@ -4,12 +4,11 @@ import Mutation from "./Mutation/index.js";
 import Query from "./Query/index.js";
 import Product from "./Product/index.js";
 import ProductVariant from "./ProductVariant/index.js";
-
 export default {
   ProductConfiguration,
   Mutation,
   Query,
   Product,
   ProductVariant,
-  ...getConnectionTypeResolvers("Product")
+  ...getConnectionTypeResolvers("Product"),
 };

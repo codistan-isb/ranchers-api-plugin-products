@@ -9,7 +9,6 @@ type Product {
   "The ReferenceId of the product"
   referenceId: String
 
-
   inventoryStatus: String
   "The date and time at which this product was created"
   createdAt: DateTime!
@@ -158,6 +157,9 @@ type ProductVariant {
   "A short title to use for product detail select lists"
   optionTitle: String
 
+  # store info resolver
+  productStoreInfo: uploadedBy
+
   "Child variants, if any"
   options(
     "Include hidden variants"
@@ -193,7 +195,16 @@ type ProductVariant {
   "The width of the product, if it has physical dimensions"
   width: Float
 }
-
+type uploadedBy {
+  storeName: String
+  name: String
+  userId: ID
+}
+# type productStoreInfoResolver {
+#   storeName: String
+#   name: String
+#   userId: String
+# }
 "Response payload of `archiveProducts` mutation"
 type ArchiveProductsPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
@@ -404,8 +415,7 @@ input ProductInput {
   """
   _id: String
 
-
- " BrandID of the product"
+  " BrandID of the product"
   brandId: ID
 
   "The full product description, which may have newline characters in it"
@@ -462,7 +472,7 @@ input ProductInput {
   "The product vendor or manufacturer, for display"
   vendor: String
   "The product ReferenceId "
-   referenceId: String
+  referenceId: String
 }
 
 "Mutation input for a product variant or option"
