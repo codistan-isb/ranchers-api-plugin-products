@@ -221,6 +221,10 @@ export const ProductVariant = new SimpleSchema({
     type: String,
     optional: true,
   },
+  size: {
+    type: String,
+    optional: true,
+  },
   originCountry: {
     type: String,
     optional: true,

@@ -113,6 +113,14 @@ type Product {
   vendor: String
 }
 
+
+enum sizeType {
+Small
+Medium
+Large
+ExtraLarge
+}
+
 "A Reaction product variant or option"
 type ProductVariant {
   "Variant ID"
@@ -156,6 +164,9 @@ type ProductVariant {
 
   "A short title to use for product detail select lists"
   optionTitle: String
+
+   " The size of the product variant"
+  size: sizeType
 
   # store info resolver
   productStoreInfo: uploadedBy
@@ -518,6 +529,9 @@ input ProductVariantInput {
 
   "A short title to use for product detail select lists"
   optionTitle: String
+
+   " The size of the product variant"
+  size: sizeType
 
   "The country of origin"
   originCountry: String
