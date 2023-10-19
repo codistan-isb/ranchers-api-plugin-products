@@ -63,3 +63,6 @@ extend type Mutation {
   ): ProductTagsOperationPayload!
   assignReferenceIdsToProducts: Boolean
 }
+extend type Query {
+    optionTitle: Boolean
+}

@@ -39,7 +39,7 @@ export default async function createProductVariant(context, input) {
   let uploadedBy;
   // See that parent product exists
   const parentProduct = await Products.findOne({ _id: productId, shopId });
-  console.log("parentProduct", parentProduct.uploadedBy);
+  // console.log("parentProduct", parentProduct.uploadedBy);
   console.log("User ", context.user);
   if (parentProduct.uploadedBy) {
     uploadedBy = parentProduct.uploadedBy;
@@ -57,6 +57,19 @@ export default async function createProductVariant(context, input) {
   console.log("variant", productVariantInput.price);
 if(productVariantInput.price === 0 || productVariantInput.price === null){
   throw new ReactionError("invalid-param", "Price cannot be 0");
+}
+if (!productVariantInput.media) {
+  throw new ReactionError("invalid-param", "media cannot be empty");
+}
+console.log("productInput.media", productVariantInput.media[0]);
+// Check for media.urls
+if (!productVariantInput.media[0].URLs) {
+  throw new ReactionError("invalid-param", "media.urls cannot be empty");
+}
+
+const { large, medium, small, thumbnail } = productVariantInput.media[0].URLs;
+if (!large || !medium || !small || !thumbnail) {
+  throw new ReactionError("invalid-param", "large, medium, small and thumbnail URLs cannot be empty");
 }
 
   let product;
