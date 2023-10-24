@@ -2,7 +2,7 @@ import resolveShopFromShopId from "@reactioncommerce/api-utils/graphql/resolveSh
 import { encodeProductOpaqueId } from "../../xforms/id.js";
 import getVariants from "../../utils/getVariants.js";
 import getVariantMedia from "../../utils/getVariantMedia.js";
-import productStoreInfo from "../ProductVariant/productStoreInfo.js";
+import productStoreInfo from "./productStoreInfo.js";
 
 export default {
   _id: (node) => encodeProductOpaqueId(node._id),
@@ -11,6 +11,6 @@ export default {
   options: (node, args, context) =>
     getVariants(context, node._id, undefined, args),
   shop: resolveShopFromShopId,
-  uploadedBy: (node, args, context) =>
-    productStoreInfo(context, node, undefined, args),
+  productStoreInfo: (node, args, context) =>
+    productStoreInfo(node, args, undefined, context),
 };
