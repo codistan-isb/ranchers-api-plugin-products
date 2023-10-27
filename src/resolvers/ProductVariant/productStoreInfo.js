@@ -1,17 +1,18 @@
-export default async function productStoreInfo(context, args, parent, info) {
-  // console.log("args", args);
-  // console.log("parent", parent);
+export default async function productStoreInfo(node, args, parent, context) {
   const { collections } = context;
   const { Accounts } = collections;
-  // console.log("Accounts", Accounts);
-  // console.log("parent", args);
-  let accountDetails = await Accounts.find({
-    _id: args?.uploadedBy?.userId,
-  }).toArray();
-  console.log("accountDetails product plugin", accountDetails);
-  return {
-    storeName: accountDetails[0]?.storeName,
-    name: accountDetails[0]?.name,
-    userId: accountDetails[0]?._id,
+
+  console.log("userID", node?.uploadedBy?.userId);
+  let accountDetails = await Accounts.findOne({
+    _id: node?.uploadedBy?.userId,
+  })
+
+  console.log("storename", accountDetails?.storeName);
+  const productStoreInfo = {
+    storeName: accountDetails?.storeName,
+    name: accountDetails?.name,
+    userId: accountDetails?._id,
   };
+console.log("productStoreInfo", productStoreInfo);
+  return productStoreInfo;
 }

@@ -38,40 +38,39 @@ export default async function createProduct(context, input) {
     shopId,
     shouldCreateFirstVariant = true,
   } = input;
-
+console.log("productInput", productInput);
   // Check that user has permission to create product
   await context.validatePermissions("reaction:legacy:products", "create", {
     shopId,
   });
 
+  if (!productInput.media) {
+    throw new ReactionError("invalid-param", "media cannot be empty");
+  }
+console.log("productInput.media", productInput.media[0]);
+  // Check for media.urls
+  if (!productInput.media[0].URLs) {
+    throw new ReactionError("invalid-param", "media.urls cannot be empty");
+  }
+
+  const { large, medium, small, thumbnail } = productInput.media[0].URLs;
+  if (!large || !medium || !small || !thumbnail) {
+    throw new ReactionError("invalid-param", "large, medium, small and thumbnail URLs cannot be empty");
+  }
+
+
   let newProductId = (productInput && productInput._id) || Random.id();
   let lastReferenceId = await generateRandomReferenceId(context);
-  // let lastProductReferenceId = await ProductSequence.find().toArray();
-  // console.log("lastProductReferenceId", lastProductReferenceId);
-  // let lastReferenceId = lastProductReferenceId[0]?.lastRandomId
-  //   ? (parseInt(lastGeneratedId[0]?.lastRandomId) + 1).toString()
-  //   : 0;
-  // ProductSequence.updateOne(
-  //   { _id: lastProductReferenceId[0]?._id },
-  //   {
-  //     $set: {
-  //       lastRandomId: lastReferenceId,
-  //       updatedAt: new Date(),
-  //     },
-  //   }
-  // );
-  // let newOrderId=shop?.lastOrderId? parseInt(shop?.lastOrderId)+1:1;
+  
   console.log("lastReferenceId", lastReferenceId);
-  // if (isNaN(lastReferenceId)) {
-  //   lastReferenceId = 0;
-  // }
+ 
 
   const initialProductData = await cleanProductInput(context, {
     productId: newProductId,
     productInput,
     shopId,
   });
-  console.log("initialProductData", initialProductData);
+
 
   if (initialProductData.isDeleted) {
     throw new ReactionError(

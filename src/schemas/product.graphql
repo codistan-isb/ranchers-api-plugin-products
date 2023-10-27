@@ -169,7 +169,7 @@ type ProductVariant {
   size: sizeType
 
   # store info resolver
-  productStoreInfo: uploadedBy
+  productStoreInfo: productStoreInfo
 
   "Child variants, if any"
   options(
@@ -206,7 +206,7 @@ type ProductVariant {
   "The width of the product, if it has physical dimensions"
   width: Float
 }
-type uploadedBy {
+type productStoreInfo {
   storeName: String
   name: String
   userId: ID

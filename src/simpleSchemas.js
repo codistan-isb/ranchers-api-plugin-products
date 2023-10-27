@@ -172,6 +172,10 @@ export const ProductVariant = new SimpleSchema({
   "uploadedBy.$": {
     type: String,
   },
+  productStoreInfo: {
+    type: Object,
+    optional: true,
+  },
   attributeLabel: {
     type: String,
     optional: true,
