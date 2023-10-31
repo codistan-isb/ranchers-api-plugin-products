@@ -64,5 +64,5 @@ extend type Mutation {
   assignReferenceIdsToProducts: Boolean
 }
 extend type Query {
-    optionTitle: Boolean
+    updateOptionTitle: Boolean
 }
