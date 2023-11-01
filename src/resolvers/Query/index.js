@@ -4,5 +4,5 @@ import updateOptionTitle from "./updateOptionTitle.js";
 export default {
   product,
   products,
-  updateOptionTitle,
+  updateOptionTitle
 };

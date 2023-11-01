@@ -32,7 +32,7 @@ input ProductTagsOperationInput {
 }
 
 "Response payload managing tags on products"
-type ProductTagsOperationPayload  {
+type ProductTagsOperationPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -63,6 +63,6 @@ extend type Mutation {
   ): ProductTagsOperationPayload!
   assignReferenceIdsToProducts: Boolean
 }
-extend type Query {
-    updateOptionTitle: Boolean
+type Query {
+  updateOptionTitle: Boolean
 }
