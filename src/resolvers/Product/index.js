@@ -5,10 +5,12 @@ import getProductMedia from "../../utils/getProductMedia.js";
 import socialMetadata from "./socialMetadata.js";
 import tagIds from "./tagIds.js";
 import tags from "./tags.js";
+import sameDayDelivery from '../../utils/sameDayDelivery.js'
 
 export default {
   _id: (node) => encodeProductOpaqueId(node._id),
   media: (node, args, context) => getProductMedia(node, args, context),
+  sameDayDelivery: (node, args, context) => sameDayDelivery(node, args, context),
   metafields: (node) => node.metafields || [],
   shop: resolveShopFromShopId,
   slug: (node) => node.handle,

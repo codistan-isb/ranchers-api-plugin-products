@@ -62,6 +62,7 @@ extend type Mutation {
     input: ProductTagsOperationInput!
   ): ProductTagsOperationPayload!
   assignReferenceIdsToProducts: Boolean
+  unPublishProductsScript(ID: String): Boolean
 }
 type Query {
   updateOptionTitle: Boolean

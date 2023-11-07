@@ -25,6 +25,9 @@ type Product {
   "True if this product should be shown to shoppers. Typically, non-visible products are not returned in queries."
   isVisible: Boolean!
 
+  # same day delivery resolver
+  sameDayDelivery: Boolean
+
   "All media for a product"
   media(
     "Determines whether variant media should be included in the product or not"
@@ -113,12 +116,11 @@ type Product {
   vendor: String
 }
 
-
 enum sizeType {
-Small
-Medium
-Large
-ExtraLarge
+  Small
+  Medium
+  Large
+  ExtraLarge
 }
 
 "A Reaction product variant or option"
@@ -165,7 +167,7 @@ type ProductVariant {
   "A short title to use for product detail select lists"
   optionTitle: String
 
-   " The size of the product variant"
+  " The size of the product variant"
   size: sizeType
 
   # store info resolver
@@ -530,7 +532,7 @@ input ProductVariantInput {
   "A short title to use for product detail select lists"
   optionTitle: String
 
-   " The size of the product variant"
+  " The size of the product variant"
   size: sizeType
 
   "The country of origin"
