@@ -66,4 +66,5 @@ extend type Mutation {
 }
 type Query {
   updateOptionTitle: Boolean
+  expressDeliveryScript: Boolean
 }
