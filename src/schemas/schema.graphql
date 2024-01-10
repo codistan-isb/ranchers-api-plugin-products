@@ -58,6 +58,31 @@ type instagramKeyPayload {
   _id: ID
   key: String
 }
+
+extend type  AddTagInput {
+  "Image URL"
+  image: String 
+
+  "priority"
+  priority: Int
+}
+
+extend type Tag {
+  "Image URL"
+  image: String 
+
+  "priority"
+  priority: Int
+}
+
+extend type UpdateTagInput {
+  "Image URL"
+  image: String 
+
+  "priority"
+  priority: Int
+}
+
 extend type Mutation {
   "Bulk operation for adding an array of tags to an array of products"
   addTagsToProducts(
