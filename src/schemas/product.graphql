@@ -1,3 +1,12 @@
+"Time bounds for a product"
+type TimeBounds {
+  "Start time for the product availability"
+  startTime: String!
+
+  "End time for the product availability"
+  endTime: String!
+}
+
 "A Reaction product"
 type Product {
   "Product ID"
@@ -17,6 +26,12 @@ type Product {
 
   "True if this product should be shown to shoppers. Typically, non-visible products are not returned in queries."
   isVisible: Boolean!
+
+  "True if this product is time-bound and has specific availability hours"
+  isTimeBound: Boolean
+
+  "Time bounds defining when this product is available"
+  timeBounds: TimeBounds
 
   "All media for a product"
   media(
@@ -390,6 +405,15 @@ input UpdateProductInput {
   shopId: ID!
 }
 
+"Input for time bounds"
+input TimeBoundsInput {
+  "Start time for the product availability"
+  startTime: String!
+
+  "End time for the product availability"
+  endTime: String!
+}
+
 "Mutation input for a product"
 input ProductInput {
   """
@@ -415,6 +439,12 @@ input ProductInput {
 
   "True if this product should be shown to shoppers. Typically, non-visible products are not returned in queries."
   isVisible: Boolean
+
+  "True if this product is time-bound and has specific availability hours"
+  isTimeBound: Boolean
+
+  "Time bounds defining when this product is available"
+  timeBounds: TimeBoundsInput
 
   "The product description to use for page `description` meta element in HTML"
   metaDescription: String
